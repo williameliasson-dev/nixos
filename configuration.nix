@@ -32,8 +32,7 @@
       # Workaround for https://github.com/NixOS/nix/issues/9574
       nix-path = config.nix.nixPath;
     };
-    # Opinionated: disable channels
-    channel.enable = false;
+    channel.enable = true;
 
     # Opinionated: make flake registry and nix path match flake inputs
     registry = lib.mapAttrs (_: flake: {inherit flake;}) flakeInputs;
@@ -139,8 +138,6 @@
   ];
 
   programs.steam.enable = true;
-
-
   programs.zsh = {
       enable = true;
       autosuggestions.enable = true;
@@ -148,10 +145,9 @@
       syntaxHighlighting.enable = true;
       ohMyZsh = {
          enable = true;
-         theme="agnoster";
-	};
-};
-
+         theme = "af-magic";
+              };
+   };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

@@ -60,6 +60,11 @@
   };
   programs.gh.enable = true;
 
+  programs.zsh = {
+      enable = true;
+      initExtra="fastfetch";
+};
+
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
 
