@@ -118,6 +118,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.william = {
     isNormalUser = true;
+    shell=pkgs.zsh;
     description = "william";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
@@ -138,6 +139,18 @@
   ];
 
   programs.steam.enable = true;
+
+
+  programs.zsh = {
+      enable = true;
+      autosuggestions.enable = true;
+      zsh-autoenv.enable = true;
+      syntaxHighlighting.enable = true;
+      ohMyZsh = {
+         enable = true;
+         theme="robbyrussell";
+	};
+};
 
 
   # Some programs need SUID wrappers, can be configured further or are
