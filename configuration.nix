@@ -134,7 +134,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-  kitty fastfetch wl-clipboard ripgrep steam lutris
+  kitty fastfetch wl-clipboard ripgrep steam lutris corectrl
   ];
 
   programs.steam.enable = true;
