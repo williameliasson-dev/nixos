@@ -3,15 +3,16 @@
 , ...
 }: {
   imports = [
-    ../modules/kitty.nix
-    ../modules/zsh.nix
-    ../modules/rofi.nix
-    ../modules/vim.nix
-    ../modules/hyprpaper/hyprpaper.nix
-    ../modules/fastfetch/fastfetch.nix
-    ../modules/hyprland/hyperland.nix
-    ../modules/waybar.nix
-    ../modules/dunst.nix
+    ../modules/shared/kitty.nix
+    ../modules/shared/zsh.nix
+    ../modules/shared/rofi.nix
+    ../modules/shared/vim.nix
+    ../modules/shared/hyprpaper/hyprpaper.nix
+    ../modules/shared/fastfetch/fastfetch.nix
+    ../modules/shared/hyprland/hyperland.nix
+    ../modules/shared/waybar.nix
+    ../modules/shared/dunst.nix
+    ../modules/shared/git.nix
     inputs.nixvim.homeManagerModules.nixvim
   ];
 
@@ -20,15 +21,12 @@
     homeDirectory = "/home/william";
     packages = with pkgs; [
       git
-      cmatrix
       gh
       yazi
       nerd-fonts.fira-code
       nerd-fonts.jetbrains-mono
-      lunar-client
       devenv
       xwayland
-      discord
       wl-clipboard
       kubectl
       sshfs
@@ -42,9 +40,7 @@
       gnome-keyring
       libsecret
       libgnome-keyring
-      steam
       fastfetch
-      wl-clipboard
       ripgrep
       pavucontrol
       bluez
@@ -53,8 +49,6 @@
       wireplumber
       killall
       btop
-      lact
-      morgen
       grim
       slurp
       insomnia

@@ -6,10 +6,10 @@
       splash = false;
       splash_offset = 2.0;
 
-      preload = [ "/home/william/nixos/modules/hyprpaper/stairs.jpg" ];
+      preload = [ "/home/william/nixos/modules/shared/hyprpaper/stairs.jpg" ];
 
       wallpaper = [
-        "DP-3, /home/william/nixos/modules/hyprpaper/stairs.jpg"
+        "DP-3, /home/william/nixos/modules/shared/hyprpaper/stairs.jpg"
       ];
     };
   };
