@@ -1,11 +1,10 @@
 {
   "logo": {
-    "source": "~/nixos/modules/shared/fastfetch/hero.png",
     "type": "kitty",
     "height": 15,
     "width": 30,
     "padding": {
-      "top": 5,
+      "top": 2,
       "left": 3,
     },
   },
