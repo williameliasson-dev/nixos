@@ -228,6 +228,7 @@
          background-color: #cc241d;
          color: #282828;
          font-size: 18px;
+         padding: 0 15px;
        }
 
        tooltip {

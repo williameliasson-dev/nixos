@@ -86,8 +86,6 @@
     systemPackages = with pkgs; [
       lact
       home-manager
-      swaylock-effects
-      swayidle
       glib # Provides gdbus
       dbus # General D-Bus utilities
     ];
@@ -169,6 +167,7 @@
       "networkmanager"
       "wheel"
       "docker"
+      "input"
       "plugdev"
       "audio"
       "bluetooth"
@@ -192,6 +191,9 @@
     enable = true;
     xwayland.enable = true;
   };
+
+  # In configuration.nix
+  hardware.acpilight.enable = true;
 
   hardware.bluetooth = {
     enable = true;

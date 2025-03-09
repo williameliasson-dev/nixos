@@ -2,6 +2,8 @@
 , pkgs
 , ...
 }: {
+  nixpkgs.config.allowUnfree = true;
+
   imports = [
     ../modules/shared/kitty.nix
     ../modules/shared/zsh.nix
@@ -14,6 +16,7 @@
     ../modules/shared/dunst.nix
     ../modules/shared/git.nix
     ../modules/shared/xdg-portal.nix
+    ../modules/shared/swaylock.nix
     inputs.nixvim.homeManagerModules.nixvim
   ];
 

@@ -16,6 +16,7 @@
     ../modules/shared/dunst.nix
     ../modules/shared/git.nix
     ../modules/shared/xdg-portal.nix
+    ../modules/shared/swaylock.nix
     inputs.nixvim.homeManagerModules.nixvim
   ];
 
