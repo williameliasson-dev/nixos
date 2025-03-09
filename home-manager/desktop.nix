@@ -13,6 +13,7 @@
     ../modules/shared/waybar.nix
     ../modules/shared/dunst.nix
     ../modules/shared/git.nix
+    ../modules/shared/xdg-portal.nix
     inputs.nixvim.homeManagerModules.nixvim
   ];
 

@@ -78,9 +78,18 @@
     };
   };
 
+  # REMOVED custom systemd user service for xdg-desktop-portal-hyprland
+  # Let NixOS handle it automatically
+
   # Install the package system-wide
   environment = {
-    systemPackages = [ pkgs.lact ];
+    systemPackages = with pkgs; [
+      # Your existing packages
+      lact
+      # Add these
+      glib # Provides gdbus
+      dbus # General D-Bus utilities
+    ];
     variables = {
       # If cursor is not visible, try to set this to "on".
       XDG_CURRENT_DESKTOP = "Hyprland";
@@ -90,9 +99,14 @@
     sessionVariables = {
       MOZ_ENABLE_WAYLAND = "1";
       NIXOS_OZONE_WL = "1";
-      T_QPA_PLATFORM = "wayland";
+      QT_QPA_PLATFORM = "wayland"; # Fixed typo from T_QPA_PLATFORM
       GDK_BACKEND = "wayland";
       WLR_NO_HARDWARE_CURSORS = "1";
+      BROWSER = "firefox";
+      DEFAULT_BROWSER = "firefox";
+      # Additional environment variables for proper XDG integration
+      XDG_CURRENT_DESKTOP = "Hyprland";
+      _JAVA_AWT_WM_NONREPARENTING = "1";
     };
   };
 
@@ -106,6 +120,11 @@
     };
 
     printing.enable = true;
+
+    # Enable and configure dbus service
+    dbus = {
+      enable = true;
+    };
 
     pipewire = {
       enable = true;
@@ -140,6 +159,7 @@
   console.keyMap = "sv-latin1";
   security.rtkit.enable = true;
 
+  virtualisation.docker.enable = true;
   users.users.william = {
     isNormalUser = true;
     shell = pkgs.zsh;
@@ -147,6 +167,7 @@
     extraGroups = [
       "networkmanager"
       "wheel"
+      "docker"
       "plugdev"
       "audio"
       "bluetooth"
@@ -155,18 +176,20 @@
     ];
   };
 
+  # Simplified XDG portal configuration
   xdg.portal = {
     enable = true;
     xdgOpenUsePortal = true;
-    config = {
-      common.default = [ "gtk" ];
-      hyprland.default = [ "gtk" "hyprland" ];
-    };
     extraPortals = [
       pkgs.xdg-desktop-portal-gtk
-      pkgs.xdg-desktop-portal-wlr
       pkgs.xdg-desktop-portal-hyprland
     ];
+  };
+
+  # Enable the Hyprland desktop environment
+  programs.hyprland = {
+    enable = true;
+    xwayland.enable = true;
   };
 
   hardware.bluetooth = {

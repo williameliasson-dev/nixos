@@ -23,6 +23,7 @@ in
 
     # Additional Zsh configuration
     initExtra = ''
+      fastfetch
       # Set PATH
       export PATH=$HOME/.local/bin:$PATH
 

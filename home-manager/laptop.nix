@@ -13,6 +13,7 @@
     ../modules/shared/waybar.nix
     ../modules/shared/dunst.nix
     ../modules/shared/git.nix
+    ../modules/shared/xdg-portal.nix
     inputs.nixvim.homeManagerModules.nixvim
   ];
 
@@ -22,6 +23,10 @@
     packages = with pkgs; [
       git
       gh
+      slack
+      dbeaver-bin
+      firefox
+      mariadb_114
       yazi
       nerd-fonts.fira-code
       nerd-fonts.jetbrains-mono
@@ -31,7 +36,6 @@
       kubectl
       sshfs
       spotify
-      docker
       docker-compose
       ledger-live-desktop
       adwaita-icon-theme
@@ -54,26 +58,13 @@
       insomnia
       rofi-power-menu
       obsidian
-      ungoogled-chromium
     ];
     stateVersion = "24.05";
   };
 
   programs = {
     home-manager.enable = true;
-    git = {
-      enable = true;
-      userName = "williameliasson-dev";
-      userEmail = "williameliasson5@gmail.com";
-      extraConfig = {
-        push = { autoSetupRemote = true; };
-      };
-    };
   };
 
   programs.gh.enable = true;
-  programs.zsh = {
-    enable = true;
-    initExtra = "fastfetch";
-  };
 }
