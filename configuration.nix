@@ -84,9 +84,10 @@
   # Install the package system-wide
   environment = {
     systemPackages = with pkgs; [
-      # Your existing packages
       lact
-      # Add these
+      home-manager
+      swaylock-effects
+      swayidle
       glib # Provides gdbus
       dbus # General D-Bus utilities
     ];

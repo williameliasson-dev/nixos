@@ -12,7 +12,7 @@
         spacing = 5;
         modules-left = [ "custom/logo" "hyprland/workspaces" ];
         modules-center = [ "clock" ];
-        modules-right = [ "pulseaudio" "network" "cpu" "memory" "battery" "custom/power" ];
+        modules-right = [ "pulseaudio" "network" "battery" "custom/power" ];
 
         "custom/logo" = {
           format = "";
@@ -43,15 +43,6 @@
           format = "{:%H:%M}";
           format-alt = "{:%Y-%m-%d}";
           tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
-        };
-
-        "cpu" = {
-          format = " {usage}% ";
-          tooltip = false;
-        };
-
-        "memory" = {
-          format = " {}% ";
         };
 
         "battery" = {
@@ -212,16 +203,6 @@
          animation-timing-function: linear;
          animation-iteration-count: infinite;
          animation-direction: alternate;
-       }
-
-       #cpu {
-         background-color: #d65d0e;
-         color: #282828;
-       }
-
-       #memory {
-         background-color: #458588;
-         color: #282828;
        }
 
        #network {

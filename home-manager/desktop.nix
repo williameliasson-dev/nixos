@@ -21,7 +21,6 @@
     username = "william";
     homeDirectory = "/home/william";
     packages = with pkgs; [
-      git
       cmatrix
       gh
       yazi

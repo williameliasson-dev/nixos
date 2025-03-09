@@ -1,6 +1,5 @@
 {
   description = "NixOS configuration with integrated Home Manager";
-
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/";
     home-manager = {
@@ -11,7 +10,6 @@
       url = "github:nix-community/nixvim/";
     };
   };
-
   outputs =
     { self
     , nixpkgs
@@ -21,6 +19,7 @@
     let
       inherit (self) outputs;
       system = "x86_64-linux";
+      pkgs = nixpkgs.legacyPackages.${system};
     in
     {
       nixosConfigurations = {
@@ -51,6 +50,21 @@
               home-manager.users.william = import ./home-manager/laptop.nix;
             }
           ];
+        };
+      };
+
+      # Add standalone Home Manager configurations
+      homeConfigurations = {
+        "william@desktop" = home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          extraSpecialArgs = { inherit inputs outputs; };
+          modules = [ ./home-manager/desktop.nix ];
+        };
+
+        "william@laptop" = home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          extraSpecialArgs = { inherit inputs outputs; };
+          modules = [ ./home-manager/laptop.nix ];
         };
       };
     };

@@ -2,6 +2,8 @@
 , pkgs
 , ...
 }: {
+  nixpkgs.config.allowUnfree = true;
+
   imports = [
     ../modules/shared/kitty.nix
     ../modules/shared/zsh.nix
@@ -21,7 +23,6 @@
     username = "william";
     homeDirectory = "/home/william";
     packages = with pkgs; [
-      git
       gh
       slack
       dbeaver-bin
