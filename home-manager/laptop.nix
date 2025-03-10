@@ -24,6 +24,7 @@
     username = "william";
     homeDirectory = "/home/william";
     packages = with pkgs; [
+      wireguard-tools
       gh
       slack
       dbeaver-bin
