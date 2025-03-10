@@ -24,6 +24,7 @@
     username = "william";
     homeDirectory = "/home/william";
     packages = with pkgs; [
+      playerctl
       nodejs_22
       openssl
       nodePackages_latest.prisma
