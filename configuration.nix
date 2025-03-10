@@ -110,6 +110,14 @@
   };
 
   services = {
+    pipewire = {
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
+      jack.enable = true;
+      wireplumber.enable = true;
+    };
     xserver = {
       xkb = {
         layout = "se";
@@ -123,22 +131,6 @@
     # Enable and configure dbus service
     dbus = {
       enable = true;
-    };
-
-    pipewire = {
-      enable = true;
-      alsa.enable = true;
-      alsa.support32Bit = true;
-      pulse.enable = true;
-      jack.enable = true;
-      wireplumber.enable = true;
-      audio.enable = true;
-      extraConfig.pipewire = {
-        "context.properties" = {
-          "default.clock.rate" = 48000;
-          "default.clock.allowed-rates" = [ 44100 48000 96000 ];
-        };
-      };
     };
 
     blueman.enable = true;
@@ -173,16 +165,6 @@
       "bluetooth"
       "video"
       "render"
-    ];
-  };
-
-  # Simplified XDG portal configuration
-  xdg.portal = {
-    enable = true;
-    xdgOpenUsePortal = true;
-    extraPortals = [
-      pkgs.xdg-desktop-portal-gtk
-      pkgs.xdg-desktop-portal-hyprland
     ];
   };
 

@@ -11,7 +11,7 @@
     ../modules/shared/vim.nix
     ../modules/shared/hyprpaper/hyprpaper.nix
     ../modules/shared/fastfetch/fastfetch.nix
-    ../modules/shared/hyprland/hyperland.nix
+    ../modules/shared/hyperland.nix
     ../modules/shared/waybar.nix
     ../modules/shared/dunst.nix
     ../modules/shared/git.nix

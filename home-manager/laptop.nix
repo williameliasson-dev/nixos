@@ -11,12 +11,12 @@
     ../modules/shared/vim.nix
     ../modules/shared/hyprpaper/hyprpaper.nix
     ../modules/shared/fastfetch/fastfetch.nix
-    ../modules/shared/hyprland/hyperland.nix
+    ../modules/shared/hyperland.nix
     ../modules/shared/waybar.nix
     ../modules/shared/dunst.nix
     ../modules/shared/git.nix
-    ../modules/shared/xdg-portal.nix
     ../modules/shared/swaylock.nix
+    ../modules/shared/xdg-portal.nix
     inputs.nixvim.homeManagerModules.nixvim
   ];
 
@@ -24,7 +24,11 @@
     username = "william";
     homeDirectory = "/home/william";
     packages = with pkgs; [
+      nodejs_22
+      openssl
+      nodePackages_latest.prisma
       wireguard-tools
+      swayidle
       gh
       slack
       dbeaver-bin
@@ -35,7 +39,6 @@
       nerd-fonts.jetbrains-mono
       devenv
       xwayland
-      wl-clipboard
       kubectl
       sshfs
       spotify
@@ -56,8 +59,6 @@
       wireplumber
       killall
       btop
-      grim
-      slurp
       insomnia
       rofi-power-menu
       obsidian

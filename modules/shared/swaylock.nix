@@ -1,6 +1,9 @@
 { pkgs, ... }: {
+  home.packages = with pkgs; [ swayidle ];
+
   programs.swaylock = {
     enable = true;
+
     package = pkgs.swaylock-effects; # Using swaylock-effects for more visual options
     settings = {
       # Appearance
