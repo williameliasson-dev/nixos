@@ -51,8 +51,8 @@
             critical = 15;
           };
           format = "{capacity}% {icon}";
-          format-charging = "{capacity}% ";
-          format-plugged = "{capacity}% ";
+          format-charging = "{capacity}% ";
+          format-plugged = "{capacity}% ";
           format-alt = "{time} {icon}";
           format-icons = [ "" "" "" "" "" ];
         };

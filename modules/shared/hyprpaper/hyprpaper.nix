@@ -13,7 +13,7 @@
         "HDMI-A-1, /home/william/nixos/modules/shared/hyprpaper/stairs.jpg"
         "DP-1, /home/william/nixos/modules/shared/hyprpaper/stairs.jpg"
         "DP-2, /home/william/nixos/modules/shared/hyprpaper/stairs.jpg"
-        "DP-4, /home/william/nixos/modules/shared/hyprpaper/stairs.jpg"
+        ", /home/william/nixos/modules/shared/hyprpaper/stairs.jpg"
       ];
     };
   };

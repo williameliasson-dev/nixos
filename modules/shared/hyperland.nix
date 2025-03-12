@@ -6,7 +6,7 @@
       monitor = [
         "DP-3,3440x1440@99.9, 0x0,1"
         "DP-5,3440x1440@59.97, 0x0,1,bitdepth,10"
-        ",preferred,auto,1440"
+        ", preferred, auto, 1"
         "eDP-1,1920x1200@60, 760x1440,1"
       ];
 
