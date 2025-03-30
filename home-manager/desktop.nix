@@ -2,8 +2,6 @@
 , pkgs
 , ...
 }: {
-  nixpkgs.config.allowUnfree = true;
-
   imports = [
     ../modules/shared/kitty.nix
     ../modules/shared/zsh.nix
@@ -63,26 +61,14 @@
       insomnia
       rofi-power-menu
       obsidian
-      ungoogled-chromium
+      firefox-bin
     ];
     stateVersion = "24.05";
   };
 
   programs = {
     home-manager.enable = true;
-    git = {
-      enable = true;
-      userName = "williameliasson-dev";
-      userEmail = "williameliasson5@gmail.com";
-      extraConfig = {
-        push = { autoSetupRemote = true; };
-      };
-    };
   };
 
   programs.gh.enable = true;
-  programs.zsh = {
-    enable = true;
-    initExtra = "fastfetch";
-  };
 }

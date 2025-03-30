@@ -2,8 +2,6 @@
 , pkgs
 , ...
 }: {
-  nixpkgs.config.allowUnfree = true;
-
   imports = [
     ../modules/shared/kitty.nix
     ../modules/shared/zsh.nix
