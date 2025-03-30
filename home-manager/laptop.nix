@@ -25,6 +25,9 @@
     homeDirectory = "/home/william";
     packages = with pkgs; [
       playerctl
+      exercism
+      gcc
+      gnumake
       nodejs_22
       openssl
       nodePackages_latest.prisma
@@ -32,7 +35,6 @@
       swayidle
       gh
       slack
-      dbeaver-bin
       firefox
       mariadb_114
       yazi
@@ -63,6 +65,8 @@
       insomnia
       rofi-power-menu
       obsidian
+      beekeeper-studio
+      openpomodoro-cli
     ];
     stateVersion = "24.05";
   };

@@ -153,11 +153,11 @@
           mode = "i";
           key = "<C-e>";
           action.__raw = ''
-            function()
-              local cmp = require('cmp')
-              if cmp.visible() then
-                return cmp.mapping.abort()()
-              end
+                function()
+                  local cmp = require('cmp')
+                  if cmp.visible() then
+                    return cmp.mapping.abort()()
+                  end
             end
           '';
           options = {
@@ -173,6 +173,10 @@
         };
 
         which-key = {
+          enable = true;
+        };
+
+        friendly-snippets = {
           enable = true;
         };
 
