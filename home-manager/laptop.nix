@@ -13,7 +13,7 @@
     ../modules/shared/waybar.nix
     ../modules/shared/dunst.nix
     ../modules/shared/git.nix
-    ../modules/shared/swaylock.nix
+    ../modules/shared/hyprlock.nix
     ../modules/shared/xdg-portal.nix
     inputs.nixvim.homeManagerModules.nixvim
   ];
@@ -24,19 +24,16 @@
     packages = with pkgs; [
       playerctl
       exercism
-      gcc
       gnumake
       nodejs_22
       openssl
-      nodePackages_latest.prisma
       wireguard-tools
-      swayidle
       gh
       slack
-      firefox
-      mariadb_114
+      firefox-bin
       yazi
       nerd-fonts.fira-code
+      nerd-fonts.iosevka
       nerd-fonts.jetbrains-mono
       devenv
       xwayland
@@ -63,8 +60,8 @@
       insomnia
       rofi-power-menu
       obsidian
-      beekeeper-studio
-      openpomodoro-cli
+      dbeaver-bin
+      calcure
     ];
     stateVersion = "24.05";
   };

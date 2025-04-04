@@ -4,10 +4,10 @@
     xwayland.enable = true;
     settings = {
       monitor = [
-        "DP-3,3440x1440@99.9, 0x0,1"
-        "DP-5,3440x1440@59.97, 0x0,1"
-        ", preferred, auto, 1"
-        "eDP-1,1920x1200@60, 760x1440,1"
+        "DP-3,3440x1440@99.9,0x0,1"
+        "DP-5,3440x1440@59.97,0x0,1"
+        ",preferred,auto,1"
+        "eDP-1,1920x1200@60,760x1440,1"
       ];
 
       # Set programs that you use
@@ -113,7 +113,7 @@
         "$mainMod, TAB, exec, $windows"
         "$mainMod, P, pseudo,"
         "$mainMod, J, togglesplit,"
-        "$mainMod, F, exec, fullscreen"
+        "$mainMod, F, fullscreen"
 
         # Move focus with mainMod + vim binds
         "$mainMod, H, movefocus, l"
@@ -171,7 +171,7 @@
         ", XF86MonBrightnessUp, exec, xbacklight -inc 5"
 
         # Lock Screen
-        "$mainMod, O, exec, swaylock -f -c 000000"
+        "$mainMod, O, exec, hyprlock"
       ];
 
       # Mouse bindings

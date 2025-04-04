@@ -18,6 +18,70 @@
       ];
 
       keymaps = [
+        # Disable arrow keys
+        {
+          key = "<Up>";
+          action = "<Nop>";
+          options = {
+            desc = "Disable up arrow key";
+          };
+        }
+        {
+          key = "<Down>";
+          action = "<Nop>";
+          options = {
+            desc = "Disable down arrow key";
+          };
+        }
+        {
+          key = "<Left>";
+          action = "<Nop>";
+          options = {
+            desc = "Disable left arrow key";
+          };
+        }
+        {
+          key = "<Right>";
+          action = "<Nop>";
+          options = {
+            desc = "Disable right arrow key";
+          };
+        }
+
+        # Disable arrow keys in insert mode
+        {
+          mode = "i";
+          key = "<Up>";
+          action = "<Nop>";
+          options = {
+            desc = "Disable up arrow key in insert mode";
+          };
+        }
+        {
+          mode = "i";
+          key = "<Down>";
+          action = "<Nop>";
+          options = {
+            desc = "Disable down arrow key in insert mode";
+          };
+        }
+        {
+          mode = "i";
+          key = "<Left>";
+          action = "<Nop>";
+          options = {
+            desc = "Disable left arrow key in insert mode";
+          };
+        }
+        {
+          mode = "i";
+          key = "<Right>";
+          action = "<Nop>";
+          options = {
+            desc = "Disable right arrow key in insert mode";
+          };
+        }
+
         # HOP
 
         {

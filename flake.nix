@@ -34,6 +34,7 @@
               home-manager.useUserPackages = true;
               home-manager.extraSpecialArgs = { inherit inputs outputs; };
               home-manager.users.william = import ./home-manager/desktop.nix;
+              nixpkgs.config.allowUnfree = true;
             }
           ];
         };
@@ -44,6 +45,7 @@
             ./configuration.nix
             home-manager.nixosModules.home-manager
             {
+              nixpkgs.config.allowUnfree = true;
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.extraSpecialArgs = { inherit inputs outputs; };

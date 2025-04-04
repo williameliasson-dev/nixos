@@ -16,6 +16,10 @@
       settings = {
         experimental-features = "nix-command flakes";
         flake-registry = "";
+        substituters = [ "https://cache.nixos.org/" ];
+        trusted-public-keys = [ "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=" ];
+        always-allow-substitutes = true;
+        builders-use-substitutes = true;
         nix-path = config.nix.nixPath;
       };
       channel.enable = true;
@@ -88,6 +92,10 @@
       home-manager
       glib # Provides gdbus
       dbus # General D-Bus utilities
+      xdg-desktop-portal
+      xdg-desktop-portal-hyprland
+      xdg-desktop-portal-gtk
+      xdg-desktop-portal-wlr
     ];
     variables = {
       # If cursor is not visible, try to set this to "on".
@@ -106,6 +114,26 @@
       # Additional environment variables for proper XDG integration
       XDG_CURRENT_DESKTOP = "Hyprland";
       _JAVA_AWT_WM_NONREPARENTING = "1";
+    };
+  };
+
+  powerManagement = {
+    enable = true;
+    powertop.enable = true; # Enable powertop auto-tuning
+    cpuFreqGovernor = "ondemand"; # Default governor
+  };
+
+  services.tlp = {
+    enable = true;
+    settings = {
+      CPU_SCALING_GOVERNOR_ON_AC = "performance";
+      CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+
+      # Optional: Additional battery saving settings
+      CPU_BOOST_ON_AC = 1;
+      CPU_BOOST_ON_BAT = 0;
+      RUNTIME_PM_ON_AC = "on";
+      RUNTIME_PM_ON_BAT = "auto";
     };
   };
 
@@ -166,12 +194,6 @@
       "video"
       "render"
     ];
-  };
-
-  # Enable the Hyprland desktop environment
-  programs.hyprland = {
-    enable = true;
-    xwayland.enable = true;
   };
 
   # In configuration.nix
