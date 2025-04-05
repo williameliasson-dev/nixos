@@ -117,26 +117,6 @@
     };
   };
 
-  powerManagement = {
-    enable = true;
-    powertop.enable = true; # Enable powertop auto-tuning
-    cpuFreqGovernor = "ondemand"; # Default governor
-  };
-
-  services.tlp = {
-    enable = true;
-    settings = {
-      CPU_SCALING_GOVERNOR_ON_AC = "performance";
-      CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
-
-      # Optional: Additional battery saving settings
-      CPU_BOOST_ON_AC = 1;
-      CPU_BOOST_ON_BAT = 0;
-      RUNTIME_PM_ON_AC = "on";
-      RUNTIME_PM_ON_BAT = "auto";
-    };
-  };
-
   services = {
     pipewire = {
       enable = true;
