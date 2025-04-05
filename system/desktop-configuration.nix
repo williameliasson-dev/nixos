@@ -5,7 +5,7 @@
 , ...
 }: {
   imports = [
-    ./hardware-configuration.nix
+    ./desktop-hardware-configuration.nix
   ];
 
   nix =

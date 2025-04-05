@@ -27,7 +27,7 @@
           inherit system;
           specialArgs = { inherit inputs outputs; };
           modules = [
-            ./configuration.nix
+            ./system/desktop-configuration.nix
             home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
@@ -42,7 +42,7 @@
           inherit system;
           specialArgs = { inherit inputs outputs; };
           modules = [
-            ./configuration.nix
+            ./system/laptop-configuration.nix
             home-manager.nixosModules.home-manager
             {
               nixpkgs.config.allowUnfree = true;
