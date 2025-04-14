@@ -6,8 +6,10 @@
       colorschemes.gruvbox.enable = true;
       globals.mapleader = " ";
       opts = {
+        number = true;
         spell = true;
         spelllang = [ "en_gb" "sv" ];
+        clipboard = "unnamedplus"; # Enable system clipboard integration
       };
 
       autoCmd = [
@@ -18,6 +20,16 @@
       ];
 
       keymaps = [
+        # Visual mode ctrl+shift+c to copy to clipboard
+        {
+          mode = "v";
+          key = "<C-S-c>";
+          action = "\"+y";
+          options = {
+            desc = "Copy selection to system clipboard";
+          };
+        }
+
         # Disable arrow keys
         {
           key = "<Up>";
@@ -79,6 +91,15 @@
           action = "<Nop>";
           options = {
             desc = "Disable right arrow key in insert mode";
+          };
+        }
+
+        # YAZI
+        {
+          key = "<leader>fy";
+          action = "<cmd>Yazi<CR>";
+          options = {
+            desc = "Open Yazi file manager";
           };
         }
 
@@ -265,6 +286,11 @@
         };
 
         hop = {
+          enable = true;
+        };
+
+        # Yazi file manager plugin
+        yazi = {
           enable = true;
         };
 

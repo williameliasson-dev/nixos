@@ -14,7 +14,6 @@
     ../modules/shared/dunst.nix
     ../modules/shared/git.nix
     ../modules/shared/hyprlock.nix
-    ../modules/shared/xdg-portal.nix
     inputs.nixvim.homeManagerModules.nixvim
   ];
 
@@ -29,8 +28,13 @@
       openssl
       wireguard-tools
       gh
+      slurp
+      grim
+      wl-clipboard
+      gcc
       slack
       firefox-bin
+      ungoogled-chromium
       yazi
       nerd-fonts.fira-code
       nerd-fonts.iosevka

@@ -46,7 +46,6 @@
       libsecret
       libgnome-keyring
       fastfetch
-      wl-clipboard
       ripgrep
       pavucontrol
       bluez

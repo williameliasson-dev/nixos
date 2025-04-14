@@ -8,6 +8,7 @@
     ./laptop-hardware-configuration.nix
   ];
 
+  # Nix configuration
   nix =
     let
       flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
@@ -23,57 +24,57 @@
         nix-path = config.nix.nixPath;
       };
       channel.enable = true;
-
       extraOptions = ''
         trusted-users = root william
       '';
-
-      # Opinionated: make flake registry and nix path match flake inputs
+      # Make flake registry and nix path match flake inputs
       registry = lib.mapAttrs (_: flake: { inherit flake; }) flakeInputs;
       nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
     };
 
-  # Bootloader.
-  boot.loader = {
-    systemd-boot.enable = true;
-    efi.canTouchEfiVariables = true;
-    timeout = 0;
+  # Boot configuration
+  boot = {
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+      timeout = 0;
+    };
   };
 
-  networking.hostName = "nixos"; # Define your hostname.
-  networking.networkmanager.enable = true;
+  # Networking
+  networking = {
+    hostName = "nixos";
+    networkmanager.enable = true;
+  };
 
-  # Set your time zone.
+  # Localization
   time.timeZone = "Europe/Stockholm";
-
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
-
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "sv_SE.UTF-8";
-    LC_IDENTIFICATION = "sv_SE.UTF-8";
-    LC_MEASUREMENT = "sv_SE.UTF-8";
-    LC_MONETARY = "sv_SE.UTF-8";
-    LC_NAME = "sv_SE.UTF-8";
-    LC_NUMERIC = "sv_SE.UTF-8";
-    LC_PAPER = "sv_SE.UTF-8";
-    LC_TELEPHONE = "sv_SE.UTF-8";
-    LC_TIME = "sv_SE.UTF-8";
+  i18n = {
+    defaultLocale = "en_US.UTF-8";
+    extraLocaleSettings = {
+      LC_ADDRESS = "sv_SE.UTF-8";
+      LC_IDENTIFICATION = "sv_SE.UTF-8";
+      LC_MEASUREMENT = "sv_SE.UTF-8";
+      LC_MONETARY = "sv_SE.UTF-8";
+      LC_NAME = "sv_SE.UTF-8";
+      LC_NUMERIC = "sv_SE.UTF-8";
+      LC_PAPER = "sv_SE.UTF-8";
+      LC_TELEPHONE = "sv_SE.UTF-8";
+      LC_TIME = "sv_SE.UTF-8";
+    };
   };
+  console.keyMap = "sv-latin1";
 
-  # Define the service to run as root
+  # System services
   systemd.services = {
     NetworkManager-wait-online.enable = false;
-
     lactd = {
       description = "AMDGPU Control Daemon";
       wantedBy = [ "multi-user.target" ];
       after = [ "multi-user.target" ];
-
       serviceConfig = {
         ExecStart = "${pkgs.lact}/bin/lact daemon";
         Type = "simple";
-        # Run as root since we need direct hardware access
         User = "root";
         Group = "root";
         Restart = "on-failure";
@@ -82,54 +83,46 @@
     };
   };
 
-  # REMOVED custom systemd user service for xdg-desktop-portal-hyprland
-  # Let NixOS handle it automatically
-
-  # Install the package system-wide
+  # Environment configuration
   environment = {
     systemPackages = with pkgs; [
       lact
       home-manager
       glib # Provides gdbus
       dbus # General D-Bus utilities
-      xdg-desktop-portal
-      xdg-desktop-portal-hyprland
-      xdg-desktop-portal-gtk
-      xdg-desktop-portal-wlr
     ];
+    # Wayland/Hyprland environment variables
     variables = {
-      # If cursor is not visible, try to set this to "on".
       XDG_CURRENT_DESKTOP = "Hyprland";
       XDG_SESSION_TYPE = "wayland";
       XDG_SESSION_DESKTOP = "Hyprland";
     };
     sessionVariables = {
+      # Wayland support
       MOZ_ENABLE_WAYLAND = "1";
       NIXOS_OZONE_WL = "1";
-      QT_QPA_PLATFORM = "wayland"; # Fixed typo from T_QPA_PLATFORM
+      QT_QPA_PLATFORM = "wayland";
       GDK_BACKEND = "wayland";
       WLR_NO_HARDWARE_CURSORS = "1";
-      BROWSER = "firefox";
-      DEFAULT_BROWSER = "firefox";
-      # Additional environment variables for proper XDG integration
-      XDG_CURRENT_DESKTOP = "Hyprland";
+      # Default applications
+      BROWSER = "chromium";
+      DEFAULT_BROWSER = "chromium";
+      # Java apps
       _JAVA_AWT_WM_NONREPARENTING = "1";
     };
   };
 
   powerManagement = {
     enable = true;
-    powertop.enable = true; # Enable powertop auto-tuning
-    cpuFreqGovernor = "ondemand"; # Default governor
+    powertop.enable = true;
   };
 
+  # TLP for battery optimization
   services.tlp = {
     enable = true;
     settings = {
       CPU_SCALING_GOVERNOR_ON_AC = "performance";
       CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
-
-      # Optional: Additional battery saving settings
       CPU_BOOST_ON_AC = 1;
       CPU_BOOST_ON_BAT = 0;
       RUNTIME_PM_ON_AC = "on";
@@ -137,32 +130,65 @@
     };
   };
 
-  services = {
-    pipewire = {
+  # Audio and screen sharing
+  services.pipewire = {
+    enable = true;
+    alsa = {
       enable = true;
-      alsa.enable = true;
-      alsa.support32Bit = true;
-      pulse.enable = true;
-      jack.enable = true;
-      wireplumber.enable = true;
+      support32Bit = true;
     };
+    pulse.enable = true;
+    jack.enable = true;
+    wireplumber.enable = true;
+  };
+
+  # System security limits
+  security = {
+    pam.loginLimits = [
+      {
+        domain = "*";
+        type = "soft";
+        item = "nofile";
+        value = "524288";
+      }
+      {
+        domain = "*";
+        type = "hard";
+        item = "nofile";
+        value = "524288";
+      }
+    ];
+    rtkit.enable = true;
+  };
+
+  # XDG portal configuration (for screen sharing)
+  services.dbus.enable = true;
+  xdg.portal = {
+    enable = true;
+    wlr.enable = true;
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-gtk
+      xdg-desktop-portal-wlr
+      xdg-desktop-portal-hyprland
+    ];
+    config.common.default = [ "hyprland" "wlr" "gtk" ];
+  };
+
+  # System services
+  services = {
+    # X11 server and keyboard layout
     xserver = {
+      enable = true;
       xkb = {
         layout = "se";
         variant = "";
       };
-      enable = true;
     };
-
+    # Printing support
     printing.enable = true;
-
-    # Enable and configure dbus service
-    dbus = {
-      enable = true;
-    };
-
+    # Bluetooth manager
     blueman.enable = true;
-
+    # Login manager
     greetd = {
       enable = true;
       settings = {
@@ -174,11 +200,10 @@
     };
   };
 
-  # Configure console keymap
-  console.keyMap = "sv-latin1";
-  security.rtkit.enable = true;
-
+  # Docker virtualization
   virtualisation.docker.enable = true;
+
+  # User configuration
   users.users.william = {
     isNormalUser = true;
     shell = pkgs.zsh;
@@ -196,37 +221,40 @@
     ];
   };
 
-  # In configuration.nix
-  hardware.acpilight.enable = true;
-
-  hardware.bluetooth = {
-    enable = true;
-    powerOnBoot = true;
-    package = pkgs.bluez5-experimental; # Add this line
-    settings = {
-      General = {
-        Enable = "Source,Sink,Media,Socket";
-        Experimental = true;
-        MultiProfile = "multiple"; # This should be inside General
-        Class = "0x00240414";
-        FastConnectable = true;
-      };
-      Properties = {
-        "Media.CodecSelectors" = "sbc_xq aac ldac aptx aptx_hd";
-        "Media.SupportedCodecs" = "sbc_xq aac ldac aptx aptx_hd";
-      };
-
-      Policy = {
-        # Add this section
-        AutoEnable = true;
+  # Hardware configuration
+  hardware = {
+    acpilight.enable = true;
+    bluetooth = {
+      enable = true;
+      powerOnBoot = true;
+      package = pkgs.bluez5-experimental;
+      settings = {
+        General = {
+          Enable = "Source,Sink,Media,Socket";
+          Experimental = true;
+          MultiProfile = "multiple";
+          Class = "0x00240414";
+          FastConnectable = true;
+        };
+        Properties = {
+          "Media.CodecSelectors" = "sbc_xq aac ldac aptx aptx_hd";
+          "Media.SupportedCodecs" = "sbc_xq aac ldac aptx aptx_hd";
+        };
+        Policy = {
+          AutoEnable = true;
+        };
       };
     };
   };
 
-  programs = {
-    zsh.enable = true;
-  };
+  # Programs
+  programs.zsh.enable = true;
 
+  # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
+
+  # This value determines the NixOS release from which the default
+  # settings for stateful data, like file locations and database versions
+  # on your system were taken.
   system.stateVersion = "24.05";
 }
