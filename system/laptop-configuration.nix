@@ -68,25 +68,11 @@
   # System services
   systemd.services = {
     NetworkManager-wait-online.enable = false;
-    lactd = {
-      description = "AMDGPU Control Daemon";
-      wantedBy = [ "multi-user.target" ];
-      after = [ "multi-user.target" ];
-      serviceConfig = {
-        ExecStart = "${pkgs.lact}/bin/lact daemon";
-        Type = "simple";
-        User = "root";
-        Group = "root";
-        Restart = "on-failure";
-        RestartSec = "5";
-      };
-    };
   };
 
   # Environment configuration
   environment = {
     systemPackages = with pkgs; [
-      lact
       home-manager
       glib # Provides gdbus
       dbus # General D-Bus utilities

@@ -50,7 +50,7 @@
 
       # Decoration configuration
       decoration = {
-        rounding = 10;
+        rounding = 0;
 
         blur = {
           enabled = true;

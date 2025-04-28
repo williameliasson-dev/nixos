@@ -106,7 +106,7 @@
 
        window#waybar {
          background-color: rgba(40, 40, 40, 0.8);
-         border-radius: 10px;
+         border-radius: 0;
          color: #ebdbb2;
          transition-property: background-color;
          transition-duration: .5s;

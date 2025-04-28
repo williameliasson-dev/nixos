@@ -281,6 +281,7 @@
               { name = "nvim_lsp"; }
               { name = "path"; }
               { name = "buffer"; }
+              { name = "copilot"; }
             ];
           };
         };
@@ -291,6 +292,14 @@
 
         # Yazi file manager plugin
         yazi = {
+          enable = true;
+        };
+
+        copilot-lua = {
+          enable = true;
+        };
+
+        copilot-cmp = {
           enable = true;
         };
 
