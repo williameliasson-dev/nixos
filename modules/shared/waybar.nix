@@ -119,7 +119,7 @@
       #workspaces button {
       background-color: transparent;
       color: #ebdbb2;
-      border-radius: 10px;
+      border-radius: 0;
       font-size: 18px;
       min-width: 40px;
       min-height: 40px;
@@ -162,7 +162,7 @@
          padding: 0 10px;
          color: #ebdbb2;
          background-color: #3c3836;
-         border-radius: 10px;
+         border-radius:  0;
          padding: 0 10px;
          margin: 5px;
        }

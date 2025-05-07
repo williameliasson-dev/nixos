@@ -253,6 +253,19 @@
       ];
 
       plugins = {
+        gitblame = {
+          enable = true;
+          settings = {
+            currentLineBlame = true;
+            currentLineBlameFormatter = ''
+              function(blame)
+                return blame
+              end'';
+            currentLineBlameDelay = 1000;
+            currentLineBlamePriority = 10;
+          };
+        };
+
         web-devicons = {
           enable = true;
         };
@@ -277,11 +290,23 @@
                           end'';
             };
             sources = [
-              { name = "luasnip"; }
-              { name = "nvim_lsp"; }
-              { name = "path"; }
+              {
+                name = "luasnip";
+                priority = 500;
+              }
+
+              {
+                name = "nvim_lsp";
+                priority = 750;
+              }
+              {
+                name = "path";
+              }
               { name = "buffer"; }
-              { name = "copilot"; }
+              {
+                name = "copilot";
+                priority = 1000;
+              }
             ];
           };
         };
@@ -361,7 +386,30 @@
         lsp = {
           enable = true;
           servers = {
-            ts_ls.enable = true; # TS/JS
+            ts_ls = {
+              enable = true; # You already have this
+              settings = {
+                javascript = {
+                  suggest = {
+                    completeFunctionCalls = true;
+                    includeCompletionsWithSnippetText = true;
+                  };
+                  format = {
+                    enable = true;
+                  };
+                };
+                typescript = {
+                  # Same settings as JavaScript
+                  suggest = {
+                    completeFunctionCalls = true;
+                    includeCompletionsWithSnippetText = true;
+                  };
+                  format = {
+                    enable = true;
+                  };
+                };
+              };
+            };
             cssls.enable = true; # CSS
             tailwindcss.enable = true; # TailwindCSS
             html.enable = true; # HTML
