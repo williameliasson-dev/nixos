@@ -22,6 +22,7 @@
     homeDirectory = "/home/william";
     packages = with pkgs; [
       playerctl
+      mariadb
       exercism
       gnumake
       nodejs_22
