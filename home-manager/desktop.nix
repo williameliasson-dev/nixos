@@ -13,7 +13,6 @@
     ../modules/shared/waybar.nix
     ../modules/shared/dunst.nix
     ../modules/shared/git.nix
-    ../modules/shared/xdg-portal.nix
     ../modules/shared/hyprlock.nix
     inputs.nixvim.homeManagerModules.nixvim
   ];
@@ -24,6 +23,8 @@
     packages = with pkgs; [
       cmatrix
       gh
+      gcc
+      nodejs_22
       yazi
       nerd-fonts.fira-code
       nerd-fonts.jetbrains-mono
