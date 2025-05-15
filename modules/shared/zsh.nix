@@ -6,6 +6,7 @@ let
     update = "sudo nixos-rebuild switch --flake /home/william/nixos#";
     nixflake = "cd /home/william/nixos && nvim flake.nix";
     nas = "sudo sshfs -o allow_other,default_permissions,port=2022,uid=$(id -u),gid=$(id -g) william@192.168.0.110: ~/nas";
+    rel-notes = "git --no-pager show --pretty=format:%s -s tags/$(git describe --tags --abbrev=0)..HEAD";
   };
 in
 {
@@ -22,7 +23,7 @@ in
     shellAliases = customAliases;
 
     # Additional Zsh configuration
-    initExtra = ''
+    initContent = ''
       fastfetch
       # Set PATH
       export PATH=$HOME/.local/bin:$PATH
