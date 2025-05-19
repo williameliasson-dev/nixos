@@ -5,10 +5,10 @@
       mainBar = {
         layer = "top";
         position = "top";
-        height = 40;
-        margin-top = 5;
-        margin-left = 20;
-        margin-right = 20;
+        height = 30;
+        margin-top = 0;
+        margin-left = 0;
+        margin-right = 0;
         spacing = 5;
         modules-left = [ "custom/logo" "hyprland/workspaces" ];
         modules-center = [ "clock" ];
@@ -120,10 +120,10 @@
       background-color: transparent;
       color: #ebdbb2;
       border-radius: 0;
-      font-size: 18px;
-      min-width: 40px;
-      min-height: 40px;
-      padding: 0 10px;
+      font-size: 14px;
+      min-width: 30px;
+      min-height: 30px;
+      padding: 0 5px;
       margin: 5px;
       }
 
@@ -159,9 +159,7 @@
        #custom-media,
        #custom-power,
        #custom-logo {
-         padding: 0 10px;
-         color: #ebdbb2;
-         background-color: #3c3836;
+         color: #ffffff;
          border-radius:  0;
          padding: 0 10px;
          margin: 5px;
@@ -179,13 +177,13 @@
        }
 
        #battery {
-         background-color: #98971a;
-         color: #282828;
+         background-color: transparent;
+         color: #ffffff;
        }
 
        #battery.charging, #battery.plugged {
-         color: #282828;
-         background-color: #b8bb26;
+         color: #689d6a;
+         background-color: transparent;
        }
 
        @keyframes blink {
@@ -196,8 +194,8 @@
        }
 
        #battery.critical:not(.charging) {
-         background-color: #cc241d;
-         color: #ebdbb2;
+         background-color: transparent;
+         color: #FF0000;
          animation-name: blink;
          animation-duration: 0.5s;
          animation-timing-function: linear;
@@ -206,27 +204,27 @@
        }
 
        #network {
-         background-color: #b16286;
-         color: #282828;
+         background-color: transparent;
+         color: #ffffff;
        }
 
        #network.disconnected {
-         background-color: #cc241d;
+         background-color: transparent;
        }
 
        #pulseaudio {
-         background-color: #98971a;
-         color: #282828;
+        background-color: transparent;
+        color: #ffffff;
        }
 
        #pulseaudio.muted {
-         background-color: #fb4934;
-         color: #282828;
+        background-color: transparent;
+        color: #ffffff;
        }
 
        #custom-power {
-         background-color: #cc241d;
-         color: #282828;
+         background-color: transparent;
+         color: #FF0000;
          font-size: 18px;
          padding: 0 15px;
        }
