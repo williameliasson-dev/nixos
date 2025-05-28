@@ -35,7 +35,6 @@
       wl-clipboard
       kubectl
       sshfs
-      steam
       spotify
       docker
       docker-compose
