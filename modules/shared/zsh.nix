@@ -2,6 +2,7 @@
 let
   # Define any local variables here
   customAliases = {
+    vim = "nvim";
     ll = "ls -l";
     update = "sudo nixos-rebuild switch --flake /home/william/nixos#";
     nixflake = "cd /home/william/nixos && nvim flake.nix";
