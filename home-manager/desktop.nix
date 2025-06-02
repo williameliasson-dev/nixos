@@ -28,14 +28,12 @@
       yazi
       nerd-fonts.fira-code
       nerd-fonts.jetbrains-mono
-      lunar-client
       devenv
       xwayland
       discord
       wl-clipboard
       kubectl
       sshfs
-      spotify
       docker
       docker-compose
       ledger-live-desktop
@@ -54,12 +52,10 @@
       wireplumber
       killall
       btop
-      morgen
       grim
       slurp
       insomnia
       rofi-power-menu
-      obsidian
       firefox-bin
     ];
     stateVersion = "24.05";
