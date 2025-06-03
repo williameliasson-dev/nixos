@@ -14,6 +14,7 @@
     ../modules/shared/dunst.nix
     ../modules/shared/git.nix
     ../modules/shared/hyprlock.nix
+    ../modules/shared/chromium.nix
     inputs.nixvim.homeManagerModules.nixvim
   ];
 
@@ -35,7 +36,6 @@
       gcc
       slack
       firefox-bin
-      ungoogled-chromium
       yazi
       nerd-fonts.fira-code
       nerd-fonts.iosevka
@@ -46,7 +46,6 @@
       sshfs
       spotify
       docker-compose
-      ledger-live-desktop
       adwaita-icon-theme
       mongodb-compass
       vscode
@@ -64,7 +63,6 @@
       btop
       insomnia
       rofi-power-menu
-      obsidian
       dbeaver-bin
       calcure
     ];

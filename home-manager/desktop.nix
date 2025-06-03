@@ -14,6 +14,7 @@
     ../modules/shared/dunst.nix
     ../modules/shared/git.nix
     ../modules/shared/hyprlock.nix
+    ../modules/shared/chromium.nix
     inputs.nixvim.homeManagerModules.nixvim
   ];
 
