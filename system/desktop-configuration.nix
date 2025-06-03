@@ -73,7 +73,6 @@
       serviceConfig = {
         ExecStart = "${pkgs.lact}/bin/lact daemon";
         Type = "simple";
-        # Run as root since we need direct hardware access
         User = "root";
         Group = "root";
         Restart = "on-failure";
@@ -82,10 +81,6 @@
     };
   };
 
-  # REMOVED custom systemd user service for xdg-desktop-portal-hyprland
-  # Let NixOS handle it automatically
-
-  # Install the package system-wide
   environment = {
     systemPackages = with pkgs; [
       lact
@@ -98,7 +93,6 @@
       xdg-desktop-portal-wlr
     ];
     variables = {
-      # If cursor is not visible, try to set this to "on".
       XDG_CURRENT_DESKTOP = "Hyprland";
       XDG_SESSION_TYPE = "wayland";
       XDG_SESSION_DESKTOP = "Hyprland";
@@ -106,12 +100,11 @@
     sessionVariables = {
       MOZ_ENABLE_WAYLAND = "1";
       NIXOS_OZONE_WL = "1";
-      QT_QPA_PLATFORM = "wayland"; # Fixed typo from T_QPA_PLATFORM
+      QT_QPA_PLATFORM = "wayland";
       GDK_BACKEND = "wayland";
       WLR_NO_HARDWARE_CURSORS = "1";
-      BROWSER = "firefox";
-      DEFAULT_BROWSER = "firefox";
-      # Additional environment variables for proper XDG integration
+      BROWSER = "chromium";
+      DEFAULT_BROWSER = "chromium";
       XDG_CURRENT_DESKTOP = "Hyprland";
       _JAVA_AWT_WM_NONREPARENTING = "1";
     };
@@ -176,18 +169,17 @@
     ];
   };
 
-  # In configuration.nix
   hardware.acpilight.enable = true;
 
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = true;
-    package = pkgs.bluez5-experimental; # Add this line
+    package = pkgs.bluez5-experimental;
     settings = {
       General = {
         Enable = "Source,Sink,Media,Socket";
         Experimental = true;
-        MultiProfile = "multiple"; # This should be inside General
+        MultiProfile = "multiple";
         Class = "0x00240414";
         FastConnectable = true;
       };
@@ -197,7 +189,6 @@
       };
 
       Policy = {
-        # Add this section
         AutoEnable = true;
       };
     };

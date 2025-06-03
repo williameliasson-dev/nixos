@@ -56,6 +56,7 @@
       slurp
       insomnia
       rofi-power-menu
+      ungoogled-chromium
       firefox-bin
     ];
     stateVersion = "24.05";
