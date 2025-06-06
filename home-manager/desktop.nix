@@ -25,6 +25,7 @@
       cmatrix
       gh
       gcc
+      ripgrep
       nodejs_22
       yazi
       nerd-fonts.fira-code

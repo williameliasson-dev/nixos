@@ -172,6 +172,9 @@
 
         # Lock Screen
         "$mainMod, O, exec, hyprlock"
+
+        # Power menu
+        "$mainMod, ESCAPE, exec, rofi -show power-menu -modi power-menu:rofi-power-menu"
       ];
 
       # Mouse bindings

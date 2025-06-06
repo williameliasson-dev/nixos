@@ -108,9 +108,8 @@
         command = "${pkgs.bash}/bin/bash -c '~/.local/bin/check-video-playing || ${pkgs.hyprlock}/bin/hyprlock'";
       }
       {
-        timeout = 1200;
-        command = "${pkgs.bash}/bin/bash -c '~/.local/bin/check-video-playing || ${pkgs.hyprland}/bin/hyprctl dispatch dpms off'";
-        resumeCommand = "${pkgs.hyprland}/bin/hyprctl dispatch dpms on";
+        timeout = 900;
+        command = "${pkgs.bash}/bin/bash -c '~/.local/bin/check-video-playing || ${pkgs.systemd}/bin/systemctl suspend'";
       }
     ];
     events = [
