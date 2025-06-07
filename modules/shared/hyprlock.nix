@@ -115,7 +115,6 @@
     };
   };
 
-  # Then simplify your swayidle config
   services.swayidle = {
     enable = true;
     timeouts = [
