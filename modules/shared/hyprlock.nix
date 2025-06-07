@@ -73,43 +73,55 @@
     }
   '';
 
-  # Keep your media detection script
-  home.file.".local/bin/check-video-playing" = {
-    executable = true;
-    text = ''
-      #!/bin/sh
-      # Get status of all players
-      players=$(${pkgs.playerctl}/bin/playerctl -l 2>/dev/null || echo "")
-      # If no players, exit with error (allow lock)
-      [ -z "$players" ] && exit 1
-      for player in $players; do
-        # Skip Spotify or other music players you want to ignore
-        if [ "$player" = "spotify" ] || [ "$player" = "spotifyd" ]; then
-          continue
-        fi
-        # Check if this player is playing
-        status=$(${pkgs.playerctl}/bin/playerctl -p "$player" status 2>/dev/null || echo "")
-        if [ "$status" = "Playing" ]; then
-          # Video is playing, exit success (prevent lock)
+  home.file = {
+    ".local/bin/check-video-playing" = {
+      executable = true;
+      text = ''
+        #!/bin/sh
+        # Get status of all players
+        players=$(${pkgs.playerctl}/bin/playerctl -l 2>/dev/null || echo "")
+        # If no players, exit with error (allow lock)
+        [ -z "$players" ] && exit 1
+        for player in $players; do
+          # Skip Spotify or other music players you want to ignore
+          if [ "$player" = "spotify" ] || [ "$player" = "spotifyd" ]; then
+            continue
+          fi
+          # Check if this player is playing
+          status=$(${pkgs.playerctl}/bin/playerctl -p "$player" status 2>/dev/null || echo "")
+          if [ "$status" = "Playing" ]; then
+            # Video is playing, exit success (prevent lock)
+            exit 0
+          fi
+        done
+        # If we get here, no video is playing, exit with error (allow lock)
+        exit 1
+      '';
+    };
+
+    ".local/bin/lock-and-suspend" = {
+      executable = true;
+      text = ''
+        #!/bin/bash
+        # Check if video is playing
+        if ~/.local/bin/check-video-playing; then
           exit 0
         fi
-      done
-      # If we get here, no video is playing, exit with error (allow lock)
-      exit 1
-    '';
+        # Lock the screen
+        ${pkgs.hyprlock}/bin/hyprlock &
+        # Wait 5 minutes (300 seconds) then suspend
+        (sleep 300 && ${pkgs.systemd}/bin/systemctl suspend) &
+      '';
+    };
   };
 
-  # Swayidle configuration with hyprlock
+  # Then simplify your swayidle config
   services.swayidle = {
     enable = true;
     timeouts = [
       {
         timeout = 600;
-        command = "${pkgs.bash}/bin/bash -c '~/.local/bin/check-video-playing || ${pkgs.hyprlock}/bin/hyprlock'";
-      }
-      {
-        timeout = 900;
-        command = "${pkgs.bash}/bin/bash -c '~/.local/bin/check-video-playing || ${pkgs.systemd}/bin/systemctl suspend'";
+        command = "~/.local/bin/lock-and-suspend";
       }
     ];
     events = [
