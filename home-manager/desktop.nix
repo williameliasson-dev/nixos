@@ -23,7 +23,6 @@
     homeDirectory = "/home/william";
     packages = with pkgs; [
       cmatrix
-      gh
       gcc
       ripgrep
       nodejs_22
@@ -36,11 +35,7 @@
       wl-clipboard
       kubectl
       sshfs
-      docker
-      docker-compose
-      ledger-live-desktop
       adwaita-icon-theme
-      mongodb-compass
       vscode
       gnome-keyring
       libsecret
@@ -59,14 +54,13 @@
       insomnia
       rofi-power-menu
       ungoogled-chromium
-      firefox-bin
+      spotify
     ];
     stateVersion = "24.05";
   };
 
   programs = {
     home-manager.enable = true;
+    gh.enable = true;
   };
-
-  programs.gh.enable = true;
 }
