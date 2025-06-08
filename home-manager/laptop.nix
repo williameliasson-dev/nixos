@@ -22,7 +22,6 @@
     username = "william";
     homeDirectory = "/home/william";
     packages = with pkgs; [
-      playerctl
       mariadb
       exercism
       gnumake
