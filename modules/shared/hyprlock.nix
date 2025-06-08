@@ -2,6 +2,7 @@
   home.packages = with pkgs; [
     swayidle
     hyprlock # Hyprland's native lock screen
+    playerctl
   ];
 
   xdg.configFile."hypr/hyprlock.conf".text = ''
