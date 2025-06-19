@@ -22,6 +22,7 @@
     username = "william";
     homeDirectory = "/home/william";
     packages = with pkgs; [
+      claude-code
       cmatrix
       gcc
       ripgrep

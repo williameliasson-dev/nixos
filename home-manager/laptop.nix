@@ -15,6 +15,7 @@
     ../modules/shared/git.nix
     ../modules/shared/hyprlock.nix
     ../modules/shared/chromium.nix
+    ../modules/shared/node.nix
     inputs.nixvim.homeManagerModules.nixvim
   ];
 
@@ -22,10 +23,10 @@
     username = "william";
     homeDirectory = "/home/william";
     packages = with pkgs; [
+      claude-code
       mariadb
       exercism
       gnumake
-      nodejs_22
       openssl
       wireguard-tools
       gh
@@ -34,7 +35,6 @@
       wl-clipboard
       gcc
       slack
-      firefox-bin
       yazi
       nerd-fonts.fira-code
       nerd-fonts.iosevka
