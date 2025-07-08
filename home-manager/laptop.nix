@@ -34,6 +34,7 @@
       grim
       wl-clipboard
       gcc
+      vscode-js-debug
       slack
       yazi
       nerd-fonts.fira-code

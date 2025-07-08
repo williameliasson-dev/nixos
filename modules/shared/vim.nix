@@ -1,3 +1,4 @@
+{ pkgs, ... }:
 {
   programs.nixvim = {
     config = {
@@ -18,6 +19,64 @@
           command = "lua vim.lsp.buf.format()";
         }
       ];
+
+      # Add DAP configuration via extraConfigLua
+      extraConfigLua = ''
+        local dap = require('dap')
+        
+        -- Node.js adapter configuration
+        dap.adapters.node = {
+          type = 'executable',
+          command = 'node',
+          args = {'${pkgs.vscode-js-debug}/lib/node_modules/js-debug/dist/src/dapDebugServer.js'},
+        }
+        
+        -- JavaScript configurations
+        dap.configurations.javascript = {
+          {
+            type = 'node',
+            request = 'attach',
+            name = 'Attach to Node.js',
+            port = 9229,
+            host = '127.0.0.1',
+            localRoot = vim.fn.getcwd(),
+            remoteRoot = vim.fn.getcwd(),
+            skipFiles = { '<node_internals>/**' },
+          },
+          {
+            type = 'node',
+            request = 'launch',
+            name = 'Launch Node.js',
+            program = '$${file}',
+            cwd = vim.fn.getcwd(),
+            skipFiles = { '<node_internals>/**' },
+          },
+        }
+        
+        -- TypeScript configurations
+        dap.configurations.typescript = {
+          {
+            type = 'node',
+            request = 'attach',
+            name = 'Attach to Node.js',
+            port = 9229,
+            host = '127.0.0.1',
+            localRoot = vim.fn.getcwd(),
+            remoteRoot = vim.fn.getcwd(),
+            skipFiles = { '<node_internals>/**' },
+          },
+          {
+            type = 'node',
+            request = 'launch',
+            name = 'Launch Node.js (ts-node)',
+            program = '$${file}',
+            cwd = vim.fn.getcwd(),
+            runtimeExecutable = 'npx',
+            runtimeArgs = { 'ts-node' },
+            skipFiles = { '<node_internals>/**' },
+          },
+        }
+      '';
 
       keymaps = [
         # Visual mode ctrl+shift+c to copy to clipboard
@@ -248,6 +307,126 @@
           options = {
             silent = true;
             desc = "Cancel completion";
+          };
+        }
+
+        # DAP keybindings under 'd' prefix (d for debug)
+        {
+          key = "<leader>dc";
+          action.__raw = "function() require('dap').continue() end";
+          options = {
+            desc = "Debug: Continue";
+          };
+        }
+        {
+          key = "<leader>ds";
+          action.__raw = "function() require('dap').step_over() end";
+          options = {
+            desc = "Debug: Step Over";
+          };
+        }
+        {
+          key = "<leader>di";
+          action.__raw = "function() require('dap').step_into() end";
+          options = {
+            desc = "Debug: Step Into";
+          };
+        }
+        {
+          key = "<leader>do";
+          action.__raw = "function() require('dap').step_out() end";
+          options = {
+            desc = "Debug: Step Out";
+          };
+        }
+        {
+          key = "<leader>db";
+          action.__raw = "function() require('dap').toggle_breakpoint() end";
+          options = {
+            desc = "Debug: Toggle Breakpoint";
+          };
+        }
+        {
+          key = "<leader>dr";
+          action.__raw = "function() require('dap').restart() end";
+          options = {
+            desc = "Debug: Restart";
+          };
+        }
+        {
+          key = "<leader>dt";
+          action.__raw = "function() require('dap').terminate() end";
+          options = {
+            desc = "Debug: Terminate";
+          };
+        }
+        {
+          key = "<leader>du";
+          action.__raw = "function() require('dapui').toggle() end";
+          options = {
+            desc = "Debug: Toggle UI";
+          };
+        }
+        {
+          key = "<leader>da";
+          action.__raw = ''
+            function()
+              local dap = require('dap')
+              local configs = dap.configurations[vim.bo.filetype]
+              if not configs then
+                vim.notify("No DAP configuration found for " .. vim.bo.filetype, vim.log.levels.ERROR)
+                return
+              end
+              
+              -- Find attach configuration
+              local attach_config = nil
+              for _, config in ipairs(configs) do
+                if config.request == "attach" then
+                  attach_config = config
+                  break
+                end
+              end
+              
+              if attach_config then
+                dap.run(attach_config)
+              else
+                vim.notify("No attach configuration found for " .. vim.bo.filetype, vim.log.levels.ERROR)
+              end
+            end
+          '';
+          options = {
+            desc = "Debug: Attach to existing session";
+          };
+        }
+        {
+          key = "<leader>dl";
+          action.__raw = ''
+            function()
+              local dap = require('dap')
+              local configs = dap.configurations[vim.bo.filetype]
+              if not configs then
+                vim.notify("No DAP configuration found for " .. vim.bo.filetype, vim.log.levels.ERROR)
+                return
+              end
+              
+              -- Find launch configuration
+              local launch_config = nil
+              for _, config in ipairs(configs) do
+                if config.request == "launch" then
+                  launch_config = config
+                  break
+                end
+              end
+              
+              if launch_config then
+                dap.run(launch_config)
+              else
+                vim.notify("No launch configuration found for " .. vim.bo.filetype, vim.log.levels.ERROR)
+              end
+            end
+          '';
+          options = {
+            desc = "Debug: Launch new session";
           };
         }
       ];
@@ -484,6 +663,14 @@
         startify = {
           enable = true;
         };
+
+        # DAP (Debug Adapter Protocol) configuration
+        dap = {
+          enable = true;
+        };
+        
+        dap-ui.enable = true;
+        dap-virtual-text.enable = true;
       };
     };
   };

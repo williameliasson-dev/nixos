@@ -27,6 +27,7 @@
       gcc
       ripgrep
       nodejs_22
+      vscode-js-debug
       yazi
       nerd-fonts.fira-code
       nerd-fonts.jetbrains-mono
