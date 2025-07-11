@@ -483,6 +483,9 @@
 
         startify = {
           enable = true;
+          settings = {
+            change_to_dir = false;
+          };
         };
       };
     };
