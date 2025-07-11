@@ -6,7 +6,8 @@ let
     ll = "ls -l";
     update = "sudo nixos-rebuild switch --flake /home/william/nixos#";
     nixflake = "cd /home/william/nixos && nvim flake.nix";
-    nas = "sudo sshfs -o allow_other,default_permissions,port=2022,uid=$(id -u),gid=$(id -g) william@192.168.0.110: ~/nas";
+    nas = "sudo sshfs -o allow_other,default_permissions,port=2022,uid=$(id -u),gid=$(id -g),reconnect,ServerAliveInterval=15,ServerAliveCountMax=3,ConnectTimeout=10 william@192.168.0.110: ~/nas";
+    nas-umount = "sudo umount ~/nas 2>/dev/null || sudo umount -f ~/nas";
     rel-notes = "git --no-pager show --pretty=format:%s -s tags/$(git describe --tags --abbrev=0)..HEAD";
   };
 in
