@@ -1,9 +1,7 @@
-{
-  inputs,
-  pkgs,
-  ...
-}:
-{
+{ inputs
+, pkgs
+, ...
+}: {
   imports = [
     ../modules/shared/kitty.nix
     ../modules/shared/zsh.nix
@@ -18,7 +16,7 @@
     ../modules/shared/hyprlock.nix
     ../modules/shared/chromium.nix
     ../modules/shared/node.nix
-    inputs.nixvim.homeManagerModules.nixvim
+    inputs.nixvim.homeModules.nixvim
   ];
 
   home = {

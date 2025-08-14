@@ -157,7 +157,11 @@
       xdg-desktop-portal-wlr
       xdg-desktop-portal-hyprland
     ];
-    config.common.default = [ "hyprland" "wlr" "gtk" ];
+    config.common.default = [
+      "hyprland"
+      "wlr"
+      "gtk"
+    ];
   };
 
   # System services
@@ -179,7 +183,7 @@
       enable = true;
       settings = {
         default_session = {
-          command = "${pkgs.greetd.tuigreet}/bin/tuigreet --cmd ${pkgs.hyprland}/bin/Hyprland";
+          command = "${pkgs.tuigreet}/bin/tuigreet --cmd ${pkgs.hyprland}/bin/Hyprland";
           user = "greeter";
         };
       };
