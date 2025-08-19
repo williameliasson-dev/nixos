@@ -23,6 +23,7 @@
     username = "william";
     homeDirectory = "/home/william";
     packages = with pkgs; [
+      lazygit
       bitwarden-desktop
       claude-code
       mariadb
