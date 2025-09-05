@@ -130,20 +130,36 @@
 
   # System security limits
   security = {
-    pam.loginLimits = [
-      {
-        domain = "*";
-        type = "soft";
-        item = "nofile";
-        value = "524288";
-      }
-      {
-        domain = "*";
-        type = "hard";
-        item = "nofile";
-        value = "524288";
-      }
-    ];
+    pam = {
+      loginLimits = [
+        {
+          domain = "*";
+          type = "soft";
+          item = "nofile";
+          value = "524288";
+        }
+        {
+          domain = "*";
+          type = "hard";
+          item = "nofile";
+          value = "524288";
+        }
+      ];
+      services = {
+        sudo.fprintAuth = true;
+        login.fprintAuth = true;
+      };
+    };
+    polkit = {
+      enable = true;
+      extraConfig = ''
+        polkit.addRule(function(action, subject) {
+            if (action.id == "net.reactivated.fprint.device.enroll") {
+                return polkit.Result.YES;
+            }
+        });
+      '';
+    };
     rtkit.enable = true;
   };
 
@@ -178,6 +194,8 @@
     printing.enable = true;
     # Bluetooth manager
     blueman.enable = true;
+    # Fingerprint reader
+    fprintd.enable = true;
     # Login manager
     greetd = {
       enable = true;
