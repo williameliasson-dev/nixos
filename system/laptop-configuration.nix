@@ -208,8 +208,17 @@
     };
   };
 
-  # Docker virtualization
-  virtualisation.docker.enable = true;
+  # Virtualization
+  virtualisation = {
+    docker.enable = true;
+    libvirtd = {
+      enable = true;
+      qemu = {
+        package = pkgs.qemu_kvm;
+        runAsRoot = false;
+      };
+    };
+  };
 
   # User configuration
   users.users.william = {
@@ -220,6 +229,7 @@
       "networkmanager"
       "wheel"
       "docker"
+      "libvirtd"
       "input"
       "plugdev"
       "audio"
@@ -232,6 +242,15 @@
   # Hardware configuration
   hardware = {
     acpilight.enable = true;
+    graphics = {
+      enable = true;
+      enable32Bit = true;
+      extraPackages = with pkgs; [
+        intel-media-driver
+        intel-vaapi-driver
+        libvdpau-va-gl
+      ];
+    };
     bluetooth = {
       enable = true;
       powerOnBoot = true;

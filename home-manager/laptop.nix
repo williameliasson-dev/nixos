@@ -66,6 +66,7 @@
       rofi-power-menu
       dbeaver-bin
       calcure
+      gnome-boxes
     ];
     stateVersion = "24.05";
   };
