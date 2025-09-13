@@ -15,7 +15,8 @@
     ../modules/shared/git.nix
     ../modules/shared/hyprlock.nix
     ../modules/shared/chromium.nix
-    inputs.nixvim.homeManagerModules.nixvim
+    ../modules/shared/node.nix
+    inputs.nixvim.homeModules.nixvim
   ];
 
   home = {
@@ -28,7 +29,6 @@
       cmatrix
       gcc
       ripgrep
-      nodejs_22
       yazi
       nerd-fonts.fira-code
       nerd-fonts.jetbrains-mono
