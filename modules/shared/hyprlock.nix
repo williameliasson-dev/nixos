@@ -6,6 +6,19 @@
   ];
 
   xdg.configFile."hypr/hyprlock.conf".text = ''
+    general {
+        fingerprint_ready_message = Touch fingerprint sensor
+        fingerprint_present_message = Scanning...
+    }
+
+    auth {
+        fingerprint {
+            enabled = true
+            ready_message = Touch fingerprint sensor
+            present_message = Scanning...
+        }
+    }
+
     background {
         monitor =
         path = screenshot
@@ -86,6 +99,7 @@
         halign = center
         valign = center
     }
+
   '';
 
   xdg.configFile."hypr/hypridle.conf".text = ''
