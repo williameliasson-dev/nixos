@@ -92,11 +92,6 @@
         new_status = "master";
       };
 
-      # Gestures configuration
-      gestures = {
-        workspace_swipe = "off";
-      };
-
       # Misc configuration
       misc = {
         force_default_wallpaper = -1;
