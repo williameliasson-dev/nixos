@@ -1,7 +1,9 @@
-{ inputs
-, pkgs
-, ...
-}: {
+{
+  inputs,
+  pkgs,
+  ...
+}:
+{
   imports = [
     ../modules/shared/kitty.nix
     ../modules/shared/zsh.nix
@@ -24,6 +26,8 @@
     homeDirectory = "/home/william";
     packages = with pkgs; [
       lazygit
+      zip
+      unzip
       bitwarden-desktop
       claude-code
       mariadb

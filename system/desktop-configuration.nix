@@ -71,10 +71,6 @@
       home-manager
       glib # Provides gdbus
       dbus # General D-Bus utilities
-      xdg-desktop-portal
-      xdg-desktop-portal-hyprland
-      xdg-desktop-portal-gtk
-      xdg-desktop-portal-wlr
     ];
     variables = {
       XDG_CURRENT_DESKTOP = "Hyprland";
@@ -92,6 +88,22 @@
       XDG_CURRENT_DESKTOP = "Hyprland";
       _JAVA_AWT_WM_NONREPARENTING = "1";
     };
+  };
+
+  # XDG portal configuration (for screen sharing)
+  xdg.portal = {
+    enable = true;
+    wlr.enable = true;
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-gtk
+      xdg-desktop-portal-wlr
+      xdg-desktop-portal-hyprland
+    ];
+    config.common.default = [
+      "hyprland"
+      "wlr"
+      "gtk"
+    ];
   };
 
   services = {
