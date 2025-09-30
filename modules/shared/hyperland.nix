@@ -171,6 +171,19 @@
 
         # Power menu
         "$mainMod, ESCAPE, exec, rofi -show power-menu -modi power-menu:rofi-power-menu"
+
+        # Window sizing shortcuts
+        # Fine resize controls
+        "$mainMod ALT, H, resizeactive, -50 0"
+        "$mainMod ALT, L, resizeactive, 50 0"
+        "$mainMod ALT, K, resizeactive, 0 -50"
+        "$mainMod ALT, J, resizeactive, 0 50"
+
+        # Larger resize steps
+        "$mainMod CTRL ALT, H, resizeactive, -200 0"
+        "$mainMod CTRL ALT, L, resizeactive, 200 0"
+        "$mainMod CTRL ALT, K, resizeactive, 0 -200"
+        "$mainMod CTRL ALT, J, resizeactive, 0 200"
       ];
 
       # Mouse bindings

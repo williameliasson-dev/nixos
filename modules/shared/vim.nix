@@ -167,6 +167,22 @@
           action = "<cmd>Telescope man_pages<CR>";
           key = "<leader>fm";
         }
+
+        # FUGITIVE
+        {
+          action = "<cmd>Git<CR>";
+          key = "<leader>gs";
+          options = {
+            desc = "Git status";
+          };
+        }
+        {
+          action = "<cmd>Gvdiffsplit<CR>";
+          key = "<leader>gd";
+          options = {
+            desc = "Git vertical diff split";
+          };
+        }
         {
           action = "<cmd>Telescope lsp_definitions<CR>";
           key = "gd";
@@ -516,6 +532,10 @@
           settings = {
             change_to_dir = false;
           };
+        };
+
+        fugitive = {
+          enable = true;
         };
       };
     };
