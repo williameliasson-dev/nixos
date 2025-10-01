@@ -19,7 +19,6 @@
     let
       inherit (self) outputs;
       system = "x86_64-linux";
-      pkgs = nixpkgs.legacyPackages.${system};
     in
     {
       nixosConfigurations = {
@@ -54,17 +53,21 @@
           ];
         };
       };
-
       # Add standalone Home Manager configurations
       homeConfigurations = {
         "william@desktop" = home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
+          pkgs = import nixpkgs {
+            inherit system;
+            config.allowUnfree = true;
+          };
           extraSpecialArgs = { inherit inputs outputs; };
           modules = [ ./home-manager/desktop.nix ];
         };
-
         "william@laptop" = home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
+          pkgs = import nixpkgs {
+            inherit system;
+            config.allowUnfree = true;
+          };
           extraSpecialArgs = { inherit inputs outputs; };
           modules = [ ./home-manager/laptop.nix ];
         };

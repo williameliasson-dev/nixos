@@ -147,7 +147,18 @@
   console.keyMap = "sv-latin1";
   security.rtkit.enable = true;
 
-  virtualisation.docker.enable = true;
+  # Virtualization
+  virtualisation = {
+    docker.enable = true;
+    libvirtd = {
+      enable = true;
+      qemu = {
+        package = pkgs.qemu_kvm;
+        runAsRoot = false;
+      };
+    };
+  };
+
   users.users.william = {
     isNormalUser = true;
     shell = pkgs.zsh;
@@ -156,6 +167,7 @@
       "networkmanager"
       "wheel"
       "docker"
+      "libvirtd"
       "input"
       "plugdev"
       "audio"
