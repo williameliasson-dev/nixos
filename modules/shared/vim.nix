@@ -1,4 +1,4 @@
-{
+{ pkgs, ... }: {
   programs.nixvim = {
     config = {
       enable = true;
@@ -181,6 +181,64 @@
           key = "<leader>gd";
           options = {
             desc = "Git vertical diff split";
+          };
+        }
+
+        # DAP (Debug Adapter Protocol)
+        {
+          action.__raw = "function() require('dap').continue() end";
+          key = "<leader>dc";
+          options = {
+            desc = "Debug: Continue";
+          };
+        }
+        {
+          action.__raw = "function() require('dap').step_over() end";
+          key = "<leader>do";
+          options = {
+            desc = "Debug: Step Over";
+          };
+        }
+        {
+          action.__raw = "function() require('dap').step_into() end";
+          key = "<leader>di";
+          options = {
+            desc = "Debug: Step Into";
+          };
+        }
+        {
+          action.__raw = "function() require('dap').step_out() end";
+          key = "<leader>dO";
+          options = {
+            desc = "Debug: Step Out";
+          };
+        }
+        {
+          action.__raw = "function() require('dap').toggle_breakpoint() end";
+          key = "<leader>db";
+          options = {
+            desc = "Debug: Toggle Breakpoint";
+          };
+        }
+        {
+          action.__raw = "function() require('dap').terminate() end";
+          key = "<leader>dt";
+          options = {
+            desc = "Debug: Terminate";
+          };
+        }
+        {
+          action.__raw = "function() require('dapui').toggle() end";
+          key = "<leader>du";
+          options = {
+            desc = "Debug: Toggle UI";
+          };
+        }
+        {
+          action = "<cmd>split ~/.local/share/nvim/dap.log<CR>";
+          key = "<leader>dl";
+          options = {
+            desc = "Debug: Show DAP logs";
           };
         }
         {
@@ -536,6 +594,75 @@
 
         fugitive = {
           enable = true;
+        };
+
+        dap = {
+          enable = true;
+          extensions = {
+            dap-ui = {
+              enable = true;
+            };
+            dap-virtual-text = {
+              enable = true;
+            };
+          };
+          adapters = {
+            servers = {
+              pwa-node = {
+                host = "::1";
+                port = 8123;
+                executable = {
+                  command = "${pkgs.nodejs}/bin/node";
+                  args = [
+                    "${pkgs.vscode-js-debug}/lib/node_modules/js-debug/dist/src/dapDebugServer.js"
+                    "8123"
+                  ];
+                };
+              };
+            };
+          };
+          configurations = {
+            javascript = [
+              {
+                name = "Attach to Node.js";
+                type = "pwa-node";
+                request = "attach";
+                port = 9229;
+                address = "127.0.0.1";
+                localRoot = "\${workspaceFolder}";
+                remoteRoot = "\${workspaceFolder}";
+                sourceMaps = true;
+                restart = true;
+              }
+              {
+                name = "Launch file";
+                type = "pwa-node";
+                request = "launch";
+                program = "\${file}";
+                cwd = "\${workspaceFolder}";
+              }
+            ];
+            typescript = [
+              {
+                name = "Attach to Node.js";
+                type = "pwa-node";
+                request = "attach";
+                port = 9229;
+                address = "127.0.0.1";
+                localRoot = "\${workspaceFolder}";
+                remoteRoot = "\${workspaceFolder}";
+                sourceMaps = true;
+                restart = true;
+              }
+              {
+                name = "Launch file";
+                type = "pwa-node";
+                request = "launch";
+                program = "\${file}";
+                cwd = "\${workspaceFolder}";
+              }
+            ];
+          };
         };
       };
     };

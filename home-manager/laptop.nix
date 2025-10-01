@@ -71,6 +71,7 @@
       dbeaver-bin
       calcure
       gnome-boxes
+      vscode-js-debug
     ];
     stateVersion = "24.05";
   };
