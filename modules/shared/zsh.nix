@@ -4,9 +4,6 @@
 , ...
 }: {
   home.file.".zshrc".text = ''
-    # Install Oh-My-Zsh manually with:
-    # sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
     export ZSH="$HOME/.oh-my-zsh"
     ZSH_THEME="af-magic"
     plugins=(git)
@@ -29,10 +26,12 @@
     export PATH=$HOME/.local/bin:$PATH
     export EDITOR='nvim'
 
-    # Load Nix zsh plugins if available
-    [ -f ${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh ] && source ${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-    [ -f ${pkgs.zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && source ${pkgs.zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    # Load zsh plugins
+    source ${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+    source ${pkgs.zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    source ${pkgs.zsh-history-substring-search}/share/zsh-history-substring-search/zsh-history-substring-search.zsh
 
+    # Key bindings for history substring search
     bindkey '^[[A' history-substring-search-up
     bindkey '^[[B' history-substring-search-down
   '';
@@ -40,5 +39,6 @@
   home.packages = with pkgs; [
     zsh-autosuggestions
     zsh-syntax-highlighting
+    zsh-history-substring-search
   ];
 }
