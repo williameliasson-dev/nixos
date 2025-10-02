@@ -18,7 +18,16 @@ if [ "$EUID" -eq 0 ]; then
 	exit 1
 fi
 
-echo -e "${GREEN}[1/7] Installing essential Arch packages...${NC}"
+echo -e "${GREEN}[1/8] Enabling multilib repository...${NC}"
+if ! grep -q "^\[multilib\]" /etc/pacman.conf; then
+	echo -e "${YELLOW}Enabling multilib for 32-bit support...${NC}"
+	sudo sed -i '/\[multilib\]/,/Include/ s/^#//' /etc/pacman.conf
+	sudo pacman -Sy
+else
+	echo -e "${YELLOW}Multilib already enabled${NC}"
+fi
+
+echo -e "${GREEN}[2/8] Installing essential Arch packages...${NC}"
 sudo pacman -Syu --needed --noconfirm \
 	base-devel \
 	git \
@@ -33,7 +42,7 @@ sudo pacman -Syu --needed --noconfirm \
 	pipewire-pulse \
 	wireplumber
 
-echo -e "${GREEN}[2/7] Installing Nix...${NC}"
+echo -e "${GREEN}[3/8] Installing Nix...${NC}"
 if ! command -v nix &>/dev/null; then
 	sh <(curl -L https://nixos.org/nix/install) --daemon
 	echo -e "${YELLOW}Nix installed. Reloading daemon...${NC}"
@@ -43,18 +52,18 @@ else
 	echo -e "${YELLOW}Nix already installed, skipping...${NC}"
 fi
 
-echo -e "${GREEN}[3/7] Enabling Nix flakes...${NC}"
+echo -e "${GREEN}[4/8] Enabling Nix flakes...${NC}"
 mkdir -p ~/.config/nix
 if ! grep -q "experimental-features" ~/.config/nix/nix.conf 2>/dev/null; then
 	echo "experimental-features = nix-command flakes" >>~/.config/nix/nix.conf
 fi
 
-echo -e "${GREEN}[4/7] Sourcing Nix environment...${NC}"
+echo -e "${GREEN}[5/8] Sourcing Nix environment...${NC}"
 if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
 	. '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
 fi
 
-echo -e "${GREEN}[5/7] Cloning dotfiles repo...${NC}"
+echo -e "${GREEN}[6/8] Cloning dotfiles repo...${NC}"
 REPO_URL="https://github.com/williameliasson-dev/nixos.git"
 if [ -d ~/.config/home-manager ]; then
 	echo -e "${YELLOW}~/.config/home-manager already exists. Backing up...${NC}"
@@ -63,7 +72,7 @@ fi
 git clone "$REPO_URL" ~/.config/home-manager
 cd ~/.config/home-manager
 
-echo -e "${GREEN}[6/7] Installing home-manager...${NC}"
+echo -e "${GREEN}[7/8] Installing home-manager...${NC}"
 echo "Available configurations:"
 echo "  - william@desktop"
 echo "  - william@laptop"
@@ -80,7 +89,7 @@ else
 	echo "nix run home-manager -- switch --flake ~/.config/home-manager#william@laptop"
 fi
 
-echo -e "${GREEN}[7/7] Setting up auto-start Hyprland (optional)...${NC}"
+echo -e "${GREEN}[8/8] Setting up auto-start Hyprland (optional)...${NC}"
 read -p "Auto-start Hyprland on TTY1 login? (y/n): " AUTO_START
 if [[ "$AUTO_START" =~ ^[Yy]$ ]]; then
 	# Detect shell
@@ -92,6 +101,7 @@ if [[ "$AUTO_START" =~ ^[Yy]$ ]]; then
 
 	if ! grep -q "exec Hyprland" "$PROFILE_FILE" 2>/dev/null; then
 		cat >>"$PROFILE_FILE" <<'EOF'
+
 # Auto-start Hyprland on TTY1
 if [ -z "$DISPLAY" ] && [ "$XDG_VTNR" = 1 ]; then
   exec Hyprland
