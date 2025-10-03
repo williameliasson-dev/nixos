@@ -598,14 +598,6 @@
 
         dap = {
           enable = true;
-          extensions = {
-            dap-ui = {
-              enable = true;
-            };
-            dap-virtual-text = {
-              enable = true;
-            };
-          };
           adapters = {
             servers = {
               pwa-node = {
@@ -663,6 +655,14 @@
               }
             ];
           };
+        };
+
+        dap-ui = {
+          enable = true;
+        };
+
+        dap-virtual-text = {
+          enable = true;
         };
       };
     };
