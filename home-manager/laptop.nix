@@ -1,7 +1,9 @@
-{ inputs
-, pkgs
-, ...
-}: {
+{
+  inputs,
+  pkgs,
+  ...
+}:
+{
   imports = [
     ../modules/shared/kitty.nix
     ../modules/shared/zsh.nix
@@ -14,9 +16,7 @@
     ../modules/shared/dunst.nix
     ../modules/shared/git.nix
     ../modules/shared/hyprlock.nix
-    ../modules/shared/chromium.nix
     ../modules/shared/node.nix
-    ../modules/shared/screensharing.nix
     inputs.nixvim.homeModules.nixvim
   ];
 
@@ -27,8 +27,6 @@
       lazygit
       zip
       unzip
-      bitwarden-desktop
-      claude-code
       mariadb
       exercism
       gnumake
@@ -39,30 +37,20 @@
       grim
       wl-clipboard
       gcc
-      slack
       yazi
       nerd-fonts.fira-code
       nerd-fonts.iosevka
       nerd-fonts.jetbrains-mono
       devenv
-      xwayland
       kubectl
       sshfs
-      spotify
-      docker-compose
       adwaita-icon-theme
-      mongodb-compass
-      vscode
       gnome-keyring
       libsecret
       libgnome-keyring
       fastfetch
       ripgrep
-      pavucontrol
-      bluez
-      bluez-tools
       sbc
-      wireplumber
       killall
       btop
       insomnia
@@ -71,6 +59,7 @@
       calcure
       gnome-boxes
       vscode-js-debug
+      claude-code
     ];
     stateVersion = "24.05";
   };

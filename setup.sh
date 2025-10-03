@@ -29,18 +29,55 @@ fi
 
 echo -e "${GREEN}[2/8] Installing essential Arch packages...${NC}"
 sudo pacman -Syu --needed --noconfirm \
+	alsa-utils \
+	base \
 	base-devel \
-	git \
+	bluez \
+	bluez-utils \
+	btrfs-progs \
 	curl \
-	mesa \
-	lib32-mesa \
-	vulkan-intel \
-	lib32-vulkan-intel \
+	docker \
+	docker-compose \
+	efibootmgr \
+	fprintd \
+	git \
+	hyprland \
+	hypridle \
+	hyprlock \
+	hyprpaper \
+	intel-gpu-tools \
 	intel-media-driver \
+	intel-ucode \
+	iwd \
+	kitty \
+	lib32-mesa \
+	lib32-vulkan-intel \
+	libva-intel-driver \
+	linux \
+	linux-firmware \
+	mesa \
 	networkmanager \
+	noto-fonts-emoji \
+	openssh \
+	pavucontrol \
 	pipewire \
+	pipewire-alsa \
+	pipewire-jack \
 	pipewire-pulse \
-	wireplumber
+	polkit-gnome \
+	powertop \
+	seatd \
+	sof-firmware \
+	ttf-firacode-nerd \
+	vim \
+	vulkan-intel \
+	wayland-protocols \
+	wireplumber \
+	xdg-desktop-portal \
+	xdg-desktop-portal-gtk \
+	xdg-desktop-portal-hyprland \
+	zram-generator \
+	zsh
 
 echo -e "${GREEN}[3/8] Installing Nix...${NC}"
 if ! command -v nix &>/dev/null; then

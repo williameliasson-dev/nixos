@@ -1,8 +1,10 @@
-{ config
-, lib
-, pkgs
-, ...
-}: {
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+{
   home.file.".zshrc".text = ''
     export ZSH="$HOME/.oh-my-zsh"
     ZSH_THEME="af-magic"
@@ -15,7 +17,7 @@
     # Aliases
     alias vim="nvim"
     alias ll="ls -l"
-    alias update="home-manager switch --flake ~/.config/home-manager#william@desktop"
+    alias update="home-manager switch --flake ~/.config/home-manager#william@laptop"
     alias nixflake="cd ~/.config/home-manager && nvim flake.nix"
     alias nas="sudo sshfs -o IdentityFile=~/.ssh/homelab/id_ed25519 sftp@homelab.local:/mnt/storage ~/nas"
     alias nas-umount="umount ~/nas"
@@ -25,6 +27,12 @@
 
     export PATH=$HOME/.local/bin:$PATH
     export EDITOR='nvim'
+
+    #NVM
+
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
     # Load zsh plugins
     source ${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh

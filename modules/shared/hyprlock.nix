@@ -1,7 +1,7 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
+  # Config-only mode: assumes hypridle and hyprlock are installed via pacman
   home.packages = with pkgs; [
-    hypridle
-    hyprlock
     playerctl
   ];
 
@@ -158,7 +158,7 @@
       PartOf = [ "graphical-session.target" ];
     };
     Service = {
-      ExecStart = "${pkgs.hypridle}/bin/hypridle";
+      ExecStart = "hypridle";
       Restart = "on-failure";
       RestartSec = 1;
     };
