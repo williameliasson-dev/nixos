@@ -1,8 +1,10 @@
-{ config
-, lib
-, pkgs
-, ...
-}: {
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+{
   home.file.".config/hypr/hyprland.conf".text = ''
     # Monitors
     monitor=DP-3,3440x1440@99.9,0x0,1
@@ -151,9 +153,19 @@
     bind = , XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
     bind = , XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
 
+    # Media controls
+    bind = , XF86AudioPlay, exec, playerctl play-pause
+    bind = , XF86AudioPause, exec, playerctl play-pause
+    bind = , XF86AudioNext, exec, playerctl next
+    bind = , XF86AudioPrev, exec, playerctl previous
+    bind = , XF86AudioStop, exec, playerctl stop
+
     # Brightness
-    bind = , XF86MonBrightnessDown, exec, xbacklight -dec 5
-    bind = , XF86MonBrightnessUp, exec, xbacklight -inc 5
+    bind = , XF86MonBrightnessDown, exec, brightnessctl set 5%-
+    bind = , XF86MonBrightnessUp, exec, brightnessctl set 5%+
+
+    # Print screen
+    bind = , Print, exec, grim - | wl-copy
 
     # Lock screen
     bind = $mainMod, O, exec, hyprlock

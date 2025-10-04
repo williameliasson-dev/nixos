@@ -109,7 +109,7 @@
     }
 
     element-text, element-icon {
-        size: 40;
+        size: 32;
         margin: 0 10 0 0;
         vertical-align: 0.5;
         background-color: inherit;
@@ -124,7 +124,7 @@
   xdg.configFile."rofi/config.rasi".text = ''
      configuration {
         show-icons: true;
-        font: "JetBrains Mono 12";
+        font: "FiraCode Nerd Font Mono";
         icon-theme: "Papirus-Dark";
 
         display-ssh:    "󰣀 ssh:";
@@ -134,7 +134,7 @@
         display-combi:  "󰕘 combi:";
         display-filebrowser: "󰉋 filebrowser:";
 
-        dpi: 120;
+        dpi: 144;
     }
 
     @theme "gruvbox-material"  '';

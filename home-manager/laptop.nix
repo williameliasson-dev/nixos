@@ -36,6 +36,8 @@
       slurp
       grim
       wl-clipboard
+      brightnessctl
+      playerctl
       gcc
       yazi
       nerd-fonts.fira-code
