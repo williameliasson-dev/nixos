@@ -42,6 +42,9 @@
     # Key bindings for history substring search
     bindkey '^[[A' history-substring-search-up
     bindkey '^[[B' history-substring-search-down
+
+
+    export PATH=/usr/bin:/usr/local/bin:$PATH
   '';
 
   home.packages = with pkgs; [

@@ -41,8 +41,8 @@ sudo pacman -Syu --needed --noconfirm \
 	efibootmgr \
 	fprintd \
 	git \
-	hyprland \
 	hypridle \
+	hyprland \
 	hyprlock \
 	hyprpaper \
 	intel-gpu-tools \
@@ -77,7 +77,10 @@ sudo pacman -Syu --needed --noconfirm \
 	xdg-desktop-portal-gtk \
 	xdg-desktop-portal-hyprland \
 	zram-generator \
-	zsh
+	zsh \
+	zsh-autosuggestions \
+	zsh-history-substring-search \
+	zsh-syntax-highlighting
 
 echo -e "${GREEN}[3/8] Installing Nix...${NC}"
 if ! command -v nix &>/dev/null; then

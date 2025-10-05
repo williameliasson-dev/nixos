@@ -35,6 +35,28 @@
     map ctrl+shift+c copy_to_clipboard
     map ctrl+shift+v paste_from_clipboard
 
+    # Window splits
+    enabled_layouts splits
+    map ctrl+shift+enter launch --location=split --cwd=current
+    map ctrl+shift+minus launch --location=hsplit --cwd=current
+    map ctrl+shift+backslash launch --location=vsplit --cwd=current
+
+    # Disable default tab navigation to avoid conflicts
+    map ctrl+shift+left no_op
+    map ctrl+shift+right no_op
+
+    # Window navigation
+    map ctrl+shift+left neighboring_window left
+    map ctrl+shift+right neighboring_window right
+    map ctrl+shift+up neighboring_window up
+    map ctrl+shift+down neighboring_window down
+
+    # Window management
+    map ctrl+shift+w close_window
+    map ctrl+shift+f move_window_forward
+    map ctrl+shift+b move_window_backward
+    map ctrl+shift+r start_resizing_window
+
     # Additional configuration
     background_opacity 0.9
     map ctrl+shift+d new_tab_with_cwd
