@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   programs.nixvim = {
     config = {
       enable = true;
@@ -601,13 +602,14 @@
           adapters = {
             servers = {
               pwa-node = {
-                host = "::1";
+                host = "127.0.0.1";
                 port = 8123;
                 executable = {
                   command = "${pkgs.nodejs}/bin/node";
                   args = [
                     "${pkgs.vscode-js-debug}/lib/node_modules/js-debug/dist/src/dapDebugServer.js"
                     "8123"
+                    "127.0.0.1"
                   ];
                 };
               };

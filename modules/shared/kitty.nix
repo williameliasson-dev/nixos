@@ -1,8 +1,4 @@
-{ config
-, lib
-, pkgs
-, ...
-}: {
+{
   home.file.".config/kitty/kitty.conf".text = ''
     # General settings
     font_family FiraCode Nerd Font Mono
