@@ -6,12 +6,12 @@
 }:
 {
   home.file.".config/hypr/hyprland.conf".text = ''
-    # Monitors
-    monitor=DP-3,3440x1440@99.9,0x0,1
-    monitor=DP-5,3440x1440@59.97,0x0,1
-    monitor=HDMI-A-1,3440x1440@99.9,0x0,1
-    monitor=,preferred,auto,1
+    # Monitors - external on top, laptop on bottom, with explicit resolutions and highest refresh rates
+    monitor=DP-3,3440x1440@100,0x0,1
+    monitor=DP-5,3440x1440@60,0x0,1
+    monitor=HDMI-A-1,3440x1440@100,0x0,1
     monitor=eDP-1,1920x1200@60,760x1440,1
+    monitor=,preferred,auto,1
 
     # Programs
     $terminal = kitty
