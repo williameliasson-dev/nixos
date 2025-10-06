@@ -62,7 +62,6 @@
       "key": "└ └",
       "keyColor": "yellow",
     },
-    "break",
     {
       "type": "custom",
       "format": "\u001b[90m└──────────────────────────┘",
