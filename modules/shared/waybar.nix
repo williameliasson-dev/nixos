@@ -12,7 +12,7 @@
         spacing = 5;
         modules-left = [ "custom/logo" "hyprland/workspaces" ];
         modules-center = [ "clock" ];
-        modules-right = [ "pulseaudio" "network" "battery" "custom/power" ];
+        modules-right = [ "pulseaudio" "network" "custom/nordlayer" "battery" "custom/power" ];
 
         "custom/logo" = {
           format = "";
@@ -83,6 +83,15 @@
             default = [ "" "" "" ];
           };
           on-click = "pavucontrol";
+        };
+
+        "custom/nordlayer" = {
+          exec = "nordlayer status | grep -q 'VPN: Connected' && echo '󰦝 Connected' || echo '󰦞 Disconnected'";
+          interval = 5;
+          format = "{}";
+          tooltip = true;
+          tooltip-format = "NordLayer VPN";
+          on-click = "nordlayer connect";
         };
 
         "custom/power" = {
@@ -158,6 +167,7 @@
        #pulseaudio,
        #custom-media,
        #custom-power,
+       #custom-nordlayer,
        #custom-logo {
          color: #ffffff;
          border-radius:  0;
@@ -220,6 +230,11 @@
        #pulseaudio.muted {
         background-color: transparent;
         color: #ffffff;
+       }
+
+       #custom-nordlayer {
+         background-color: transparent;
+         color: #ffffff;
        }
 
        #custom-power {

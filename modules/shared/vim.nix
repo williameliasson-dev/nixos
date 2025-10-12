@@ -178,10 +178,31 @@
           };
         }
         {
-          action = "<cmd>Gvdiffsplit<CR>";
+          action = "<cmd>Gvdiffsplit @{upstream}<CR>";
           key = "<leader>gd";
           options = {
-            desc = "Git vertical diff split";
+            desc = "Git vertical diff split against remote";
+          };
+        }
+        {
+          action = "<cmd>Git commit<CR>";
+          key = "<leader>gc";
+          options = {
+            desc = "Git commit";
+          };
+        }
+        {
+          action = "<cmd>Git add %<CR>";
+          key = "<leader>ga";
+          options = {
+            desc = "Git add current file";
+          };
+        }
+        {
+          action = "<cmd>Git add .<CR>";
+          key = "<leader>gA";
+          options = {
+            desc = "Git add all files";
           };
         }
 
@@ -419,21 +440,24 @@
             };
             sources = [
               {
-                name = "luasnip";
-                priority = 500;
+                name = "copilot";
+                priority = 1000;
               }
-
               {
                 name = "nvim_lsp";
-                priority = 750;
+                priority = 900;
+              }
+              {
+                name = "luasnip";
+                priority = 800;
               }
               {
                 name = "path";
+                priority = 700;
               }
-              { name = "buffer"; }
               {
-                name = "copilot";
-                priority = 1000;
+                name = "buffer";
+                priority = 600;
               }
             ];
           };
