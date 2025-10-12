@@ -530,7 +530,7 @@
           };
         };
 
-        presence-nvim = {
+        presence = {
           enable = true;
         };
 
